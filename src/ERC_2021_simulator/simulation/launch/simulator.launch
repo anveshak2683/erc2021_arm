@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- gazebo -->
+  <include file="$(find ur_gazebo)/launch/ur3.launch"/>
+
+  <!-- moveit -->
+  <include file="$(find ur3_moveit_config)/launch/ur3_moveit_planning_execution.launch">
+    <arg name="sim" default="true" />
+  </include>
+
+
+  <!--
+  <include file = "$(find simulation)/aruco.launch">
+    <arg name="node_name"    value="aruco_single_582"/> 
+    <arg name="markerId"     value="582"/> 
+    <arg name="markerSize"   value="0.45"/>  
+    <arg name="marker_frame" value="aruco_582"/>
+    <arg name="reference_frame"    value="/world"/>  
+  </include>
+-->
+
+
+    <model name="aruco">
+      <pose>5 5 5 5 5 5</pose>
+      <static>true</static>
+      <link name="aruco_link">
+        <visual name="aruco_visual">
+          <geometry>
+		  <mesh><uri>file://$(find ur_description)/meshes/aruco_cube_5cm.dae</uri></mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+
+
+  <!-- rviz -->
+  <include file="$(find ur3_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" default="true" />
+  </include>
+
+</launch>
